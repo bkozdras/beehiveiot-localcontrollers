@@ -1,6 +1,12 @@
 # Beehive-IoT local controllers
 
 [![License](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
+[![LibraryLanguage](https://img.shields.io/badge/Language-C-lightgrey)](LIBRARYLANGUAGE)
+[![TestFramework](https://img.shields.io/badge/TestFramework-CMocka-lightgrey)](TESTFRAMEWORK)
+
+[![OS](https://img.shields.io/badge/OS-Linux-lightgrey)](OS)
+[![Distribution](https://img.shields.io/badge/Distribution-Ubuntu-lightgrey)](DISTRIBUTION)
+[![BuildEnvironment](https://img.shields.io/badge/BuildEnvironment-Docker-lightgrey)](SOURCELANGUAGE)
 
 The repo contains two applications:
 - BeeRouter,
