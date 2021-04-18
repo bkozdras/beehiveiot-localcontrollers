@@ -24,7 +24,7 @@ jobs:
         uses: schneegans/dynamic-badges-action@v1.0.0
         with:
           auth: ${{ secrets.GIST_CI_TOKEN }}
-          gistID: 536fc4300ff360bc55fbf7d1b618ef4c
+          gistID: 4bdea638e561aa2bdf13fad3c052a8e7
           filename: badgeBuildDockerImage.json
           label: Build
           message: unknown
@@ -54,7 +54,7 @@ jobs:
         uses: schneegans/dynamic-badges-action@v1.0.0
         with:
           auth: ${{ secrets.GIST_CI_TOKEN }}
-          gistID: 536fc4300ff360bc55fbf7d1b618ef4c
+          gistID: 4bdea638e561aa2bdf13fad3c052a8e7
           filename: badgeBuildDockerImage.json
           label: Build
           message: passing
@@ -64,7 +64,7 @@ jobs:
         uses: schneegans/dynamic-badges-action@v1.0.0
         with:
           auth: ${{ secrets.GIST_CI_TOKEN }}
-          gistID: 536fc4300ff360bc55fbf7d1b618ef4c
+          gistID: 4bdea638e561aa2bdf13fad3c052a8e7
           filename: badgeBuildDockerImage.json
           label: Build
           message: failing
