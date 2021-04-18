@@ -35,7 +35,7 @@ bash dockerimage/buildImage.sh
 ```
 Run and connect to the command interface:
 ```sh
-bash runImage.sh
+bash dockerimage/runImage.sh
 ```
 
 All next steps should be executed from running docker image.
