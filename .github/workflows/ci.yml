@@ -1,0 +1,83 @@
+name: beehiveiot-localcontrollers-ci
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+      - 'LICENSE'
+      - '.gitignore'
+jobs:
+  wait-for-previous-workflow-finished:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: "Block concurrent workflow executions"
+        uses: softprops/turnstyle@v1
+        with:
+          poll-interval-seconds: 10
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  set-unknown-state-badges-for-CI:
+    runs-on: ubuntu-latest
+    needs: wait-for-previous-workflow-finished
+    steps:
+      - name: "Create badge BuildDockerImage with unknown state"
+        uses: schneegans/dynamic-badges-action@v1.0.0
+        with:
+          auth: ${{ secrets.GIST_CI_TOKEN }}
+          gistID: 536fc4300ff360bc55fbf7d1b618ef4c
+          filename: badgeBuildDockerImage.json
+          label: Build
+          message: unknown
+          color: grey
+  start-azure-runner:
+    runs-on: ubuntu-latest
+    needs: set-unknown-state-badges-for-CI
+    steps:
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Start GitHub self-hosted runner
+        run: |
+          az vm start -g github-ci-resource-group -n github-ci-runner
+  build-docker-image:
+    runs-on: [self-hosted, Azure, Docker]
+    needs: start-azure-runner
+    steps:
+      - name: Checkout / clone GitHub repo
+        uses: actions/checkout@main
+        with:
+          submodules: true
+      - name: Build image from Dockerfile
+        run: bash dockerimage/buildImage.sh
+      - name: "Create badge BuildDockerImage with passing state"
+        uses: schneegans/dynamic-badges-action@v1.0.0
+        with:
+          auth: ${{ secrets.GIST_CI_TOKEN }}
+          gistID: 536fc4300ff360bc55fbf7d1b618ef4c
+          filename: badgeBuildDockerImage.json
+          label: Build
+          message: passing
+          color: green
+      - name: "Create badge BuildDockerImage with failing state"
+        if: ${{ failure() }}
+        uses: schneegans/dynamic-badges-action@v1.0.0
+        with:
+          auth: ${{ secrets.GIST_CI_TOKEN }}
+          gistID: 536fc4300ff360bc55fbf7d1b618ef4c
+          filename: badgeBuildDockerImage.json
+          label: Build
+          message: failing
+          color: red
+  stop-azure-runner:
+    runs-on: ubuntu-latest
+    needs: [start-azure-runner, build-docker-image]
+    if: ${{ always() }}
+    steps:
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Stop GitHub self-hosted runner
+        run: |
+          az vm deallocate -g github-ci-resource-group -n github-ci-runner --no-wait
