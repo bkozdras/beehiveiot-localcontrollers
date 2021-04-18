@@ -49,7 +49,7 @@ jobs:
         with:
           submodules: true
       - name: Build image from Dockerfile
-        run: bash dockerimage/buildImage.sh
+        run: docker --log-level=debug build . --file=dockerimage/Dockerfile --tag nemuuser/rpi-pico-build-env:latest --rm=true
       - name: "Create badge BuildDockerImage with passing state"
         uses: schneegans/dynamic-badges-action@v1.0.0
         with:
@@ -69,6 +69,15 @@ jobs:
           label: Build
           message: failing
           color: red
+      - name: "Print existing docker images before cleanup the dangling ones"
+        if: ${{ always() }}
+        run: docker images --all
+      - name: "Clean dangling docker images"
+        if: ${{ always() }}
+        run: docker rmi $(docker images -f "dangling=true" -q) || echo "No images to delete"
+      - name: "Print existing docker images after cleanup the dangling ones"
+        if: ${{ always() }}
+        run: docker images --all
   stop-azure-runner:
     runs-on: ubuntu-latest
     needs: [start-azure-runner, build-docker-image]
