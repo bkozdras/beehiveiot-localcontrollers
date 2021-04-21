@@ -3,6 +3,8 @@
 # This can be dropped into an external project to help locate this SDK
 # It should be include()ed prior to project()
 
+message(STATUS "Processing: ${CMAKE_CURRENT_LIST_FILE}")
+
 if (DEFINED ENV{PICO_SDK_PATH} AND (NOT PICO_SDK_PATH))
     set(PICO_SDK_PATH $ENV{PICO_SDK_PATH})
     message("Using PICO_SDK_PATH from environment ('${PICO_SDK_PATH}')")
@@ -32,11 +34,14 @@ if (NOT PICO_SDK_PATH)
         FetchContent_Declare(
                 pico_sdk
                 GIT_REPOSITORY https://github.com/raspberrypi/pico-sdk
-                GIT_TAG master
+                GIT_TAG ${VERSION_SDK_PICO_SDK}
+                GIT_SHALLOW 1
+                GIT_PROGRESS 1
         )
         if (NOT pico_sdk)
             message("Downloading Raspberry Pi Pico SDK")
             FetchContent_Populate(pico_sdk)
+            message("Downloaded Raspberry Pi Pico SDK")
             set(PICO_SDK_PATH ${pico_sdk_SOURCE_DIR})
         endif ()
         set(FETCHCONTENT_BASE_DIR ${FETCHCONTENT_BASE_DIR_SAVE})

@@ -10,7 +10,7 @@ include(FetchContent)
 
 FetchContent_Declare(
     cmocka
-    URL https://cmocka.org/files/1.1/cmocka-1.1.5.tar.xz
+    URL https://cmocka.org/files/${VERSION_SDK_CMOCKA}/cmocka-${VERSION_SDK_CMOCKA}${VERSION_SDK_CMOCKA_MINOR}.tar.xz
 )
 
 set(WITH_SHARED_LIB OFF CACHE BOOL "CMocka: Build with a shared library")

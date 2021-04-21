@@ -6,6 +6,13 @@
 
 message(STATUS "Processing: ${CMAKE_CURRENT_LIST_FILE}")
 
-add_subdirectory(beecontroller)
-add_subdirectory(beerouter)
-add_subdirectory(peripheries)
+add_definitions("-fno-common")
+add_definitions("-pedantic")
+add_definitions("-pedantic-errors")
+add_definitions("-Wall")
+add_definitions("-Wconversion")
+add_definitions("-Wdouble-promotion")
+add_definitions("-Werror")
+add_definitions("-Wextra")
+add_definitions("-Wshadow")
+add_definitions("-Wunused-parameter")

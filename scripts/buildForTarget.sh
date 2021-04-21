@@ -44,7 +44,11 @@ cd $BUILD_DIR
 
 cmake \
     -DCMAKE_BUILD_TYPE=Release \
-    -DBEEHIVEIOT_LC_BUILD_FOR_TARGET=ON ../.. \
+    -DCMAKE_C_COMPILER=/bin/arm-none-eabi-gcc \
+    -DCMAKE_CXX_COMPILER=/bin/arm-none-eabi-g++ \
+    -DBEEHIVEIOT_LC_BUILD_BEECONTROLLER_FOR_TARGET=ON \
+    -DBEEHIVEIOT_LC_BUILD_BEEROUTER_FOR_TARGET=ON \
+    ../.. \
     && make -j$(nproc --all)
 
 exit 0

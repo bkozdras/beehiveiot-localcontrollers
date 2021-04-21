@@ -5,7 +5,3 @@
 #**********************************************************************************#
 
 message(STATUS "Processing: ${CMAKE_CURRENT_LIST_FILE}")
-
-add_subdirectory(beecontroller)
-add_subdirectory(beerouter)
-add_subdirectory(peripheries)
