@@ -4,11 +4,23 @@
 # Licence: MIT                                                                     #
 #**********************************************************************************#
 
-message(STATUS "Processing: ${CMAKE_CURRENT_LIST_FILE}")
+#!/bin/bash
 
-add_subdirectory(mock)
-add_subdirectory(stub)
+THIS_DIR_NAME=${PWD##*/}
+if [ "$THIS_DIR_NAME" != "build_UT_x86_64" ]
+then
+    echo "ERROR: CI pipeline issue! This script (runCTest.sh) should be executed from build_UT_x86_64 directory!"
+    echo "This directory: $THIS_DIR_NAME"
+    exit -1
+fi
 
-if (BUILD_UNIT_TESTS)
-    add_subdirectory(ut)
-endif (BUILD_UNIT_TESTS)
+ctest -j$(nproc --all) --output-on-failure --timeout 5
+
+if [ $? -ne 0 ]
+then
+    echo "Failure in ctest. Cleaning up directory..."
+    rm -r -f *
+    exit -1
+fi
+
+exit 0

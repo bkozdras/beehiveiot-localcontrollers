@@ -36,7 +36,6 @@ message(STATUS "This architecture \(used for tests only\): ${THIS_ARCH}")
 enable_language(C)
 
 set(CMAKE_C_STANDARD 11)
-set(CMAKE_CXX_STANDARD 17)
 
 if (BUILD_FOR_TARGET OR BUILD_DEVELOPMENT_BINARIES_FOR_TARGET)
     message(STATUS "Initializing pico-sdk...")
@@ -44,7 +43,7 @@ if (BUILD_FOR_TARGET OR BUILD_DEVELOPMENT_BINARIES_FOR_TARGET)
 endif (BUILD_FOR_TARGET OR BUILD_DEVELOPMENT_BINARIES_FOR_TARGET)
 
 if (BUILD_MODULE_TESTS OR BUILD_UNIT_TESTS)
-    include(cmake/FetchCMocka.cmake)
+    include(cmake/FetchAndInitializeCMocka.cmake)
     include(cmake/SetCompilerFlagsForTests.cmake)
 endif (BUILD_MODULE_TESTS OR BUILD_UNIT_TESTS)
 
@@ -62,7 +61,5 @@ add_subdirectory(src)
 
 if (BUILD_MODULE_TESTS OR BUILD_UNIT_TESTS)
     enable_testing()
-    add_subdirectory(mock)
-    add_subdirectory(stub)
     add_subdirectory(test)
 endif (BUILD_MODULE_TESTS OR BUILD_UNIT_TESTS)

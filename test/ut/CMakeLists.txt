@@ -6,9 +6,8 @@
 
 message(STATUS "Processing: ${CMAKE_CURRENT_LIST_FILE}")
 
-add_subdirectory(mock)
-add_subdirectory(stub)
-
-if (BUILD_UNIT_TESTS)
-    add_subdirectory(ut)
-endif (BUILD_UNIT_TESTS)
+add_cmocka_test(TEST_UT_DUMMY_TEST
+    SOURCES DummyTest.c
+    COMPILE_OPTIONS -D_DEFAULT_SOURCE
+    LINK_LIBRARIES
+        ${CMOCKA_STATIC_LIBRARY})
