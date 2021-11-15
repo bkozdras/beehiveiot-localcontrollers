@@ -105,9 +105,9 @@ jobs:
           submodules: true
       - name: Set executable privileges to CI run scripts
         run: |
-          chmod +x ${{ github.workspace }}/ci/ut/runCMake.sh
-          chmod +x ${{ github.workspace }}/ci/ut/runCTest.sh
-          chmod +x ${{ github.workspace }}/ci/ut/runMake.sh
+          chmod +x ${{ github.workspace }}/ci/ut_x86_64/runCMake.sh
+          chmod +x ${{ github.workspace }}/ci/ut_x86_64/runCTest.sh
+          chmod +x ${{ github.workspace }}/ci/ut_x86_64/runMake.sh
       - name: "Check docker container availability"
         uses: addnab/docker-run-action@v3
         with:
@@ -136,7 +136,7 @@ jobs:
           options: -v ${{ github.workspace }}:/workspaceUT
           run: |
             cd workspaceUT/build_UT_x86_64
-            bash ../ci/ut/runCMake.sh
+            bash ../ci/ut_x86_64/runCMake.sh
       - name: "Create badge UTX8664Cmake with passing state"
         uses: schneegans/dynamic-badges-action@v1.0.0
         with:
@@ -165,7 +165,7 @@ jobs:
           options: -v ${{ github.workspace }}:/workspaceUT
           run: |
             cd workspaceUT/build_UT_x86_64
-            bash ../ci/ut/runMake.sh
+            bash ../ci/ut_x86_64/runMake.sh
       - name: "Create badge UTX8664Build with passing state"
         uses: schneegans/dynamic-badges-action@v1.0.0
         with:
@@ -194,7 +194,7 @@ jobs:
           options: -v ${{ github.workspace }}:/workspaceUT
           run: |
             cd workspaceUT/build_UT_x86_64
-            bash ../ci/ut/runCTest.sh
+            bash ../ci/ut_x86_64/runCTest.sh
       - name: "Create badge UTX8664CTest with passing state"
         uses: schneegans/dynamic-badges-action@v1.0.0
         with:

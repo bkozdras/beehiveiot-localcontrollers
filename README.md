@@ -30,6 +30,12 @@ BeeMaster repo: TODO
 [![JobBuildDockerImage](https://img.shields.io/badge/Job-Build--Docker--Image-lightgrey)](JOBBUILDOCKERIMAGE)
 ![badgeBuildDockerImage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/bkozdras/4bdea638e561aa2bdf13fad3c052a8e7/raw/badgeBuildDockerImage.json?service=github)
 
+[![JobUTX8664](https://img.shields.io/badge/Job-UT--x86--64-lightgrey)](JOBUTX8664)
+
+![badgeUTX8664CMake](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/bkozdras/4bdea638e561aa2bdf13fad3c052a8e7/raw/badgeUTX8664Cmake.json?service=github)
+![badgeUTX8664Build](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/bkozdras/4bdea638e561aa2bdf13fad3c052a8e7/raw/badgeUTX8664Build.json?service=github)
+![badgeUTX8664CTest](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/bkozdras/4bdea638e561aa2bdf13fad3c052a8e7/raw/badgeUTX8664CTest.json?service=github)
+
 # Preparing of local build environment
 
 All build commands should be executed from docker image attached to this repo as submodule: dockerimage.
