@@ -22,7 +22,7 @@ fi
 
 cmake \
     -DCMAKE_BUILD_TYPE=Debug \
-    -DCMAKE_C_COMPILER=gcc-$GCC_MAJOR_VERSION \
+    -DCMAKE_C_COMPILER=gcc-$GCC_VERSION \
     -DBEEHIVEIOT_LC_BUILD_UNIT_TESTS=ON ..
 
 if [ $? -ne 0 ]
